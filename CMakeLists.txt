@@ -6,12 +6,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 find_package(fmt CONFIG REQUIRED)
+find_package(argparse CONFIG REQUIRED)
+find_package(nlohmann_json CONFIG REQUIRED)
 
 add_executable(${CMAKE_PROJECT_NAME})
 
 target_sources(${CMAKE_PROJECT_NAME}
     PRIVATE
         src/main.cpp
+        src/application.cpp
+        src/mib/base.cpp
+        src/cmd_print.cpp
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME}
@@ -27,4 +32,6 @@ target_compile_options(${CMAKE_PROJECT_NAME}
 target_link_libraries(${CMAKE_PROJECT_NAME}
     PRIVATE
         fmt::fmt
+        argparse::argparse
+        nlohmann_json::nlohmann_json
 )
