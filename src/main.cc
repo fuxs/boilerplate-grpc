@@ -18,8 +18,8 @@
   \_____|                   
 */
 
-#include "application.hpp"
-#include "cmd.hpp"
+#include "application.h"
+#include "cmd.h"
 
 int main(int argc, char *argv[])
 {

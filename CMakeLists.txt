@@ -9,14 +9,16 @@ find_package(fmt CONFIG REQUIRED)
 find_package(argparse CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
 
+include(grpc.cmake)
+
 add_executable(${CMAKE_PROJECT_NAME})
 
 target_sources(${CMAKE_PROJECT_NAME}
     PRIVATE
-        src/main.cpp
-        src/application.cpp
-        src/mib/base.cpp
-        src/cmd_print.cpp
+        src/main.cc
+        src/application.cc
+        src/mib/base.cc
+        src/cmd_print.cc
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME}

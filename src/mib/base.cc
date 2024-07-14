@@ -1,4 +1,4 @@
-#include "mib/base.hpp"
+#include "mib/base.h"
 
 void mib::ApplicationBase::add(Command &cmd)
 {

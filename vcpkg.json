@@ -2,6 +2,8 @@
   "dependencies": [
     "fmt",
     "argparse",
-    "nlohmann-json"
+    "nlohmann-json",
+    "protobuf",
+    "grpc"
   ]
 }

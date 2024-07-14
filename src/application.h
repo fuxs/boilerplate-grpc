@@ -1,6 +1,6 @@
 #pragma once
 
-#include "mib/base.hpp"
+#include "mib/base.h"
 
 namespace mib
 {
