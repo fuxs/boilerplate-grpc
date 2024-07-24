@@ -17,4 +17,16 @@ namespace mib
     private:
         std::vector<std::string> messages_;
     };
+
+    class CmdStart : public Command
+    {
+
+    public:
+        CmdStart();
+        void update(json &args);
+        bool run(json &args);
+
+    private:
+        std::string address_;
+    };
 }

@@ -19,6 +19,8 @@ target_sources(${CMAKE_PROJECT_NAME}
         src/application.cc
         src/mib/base.cc
         src/cmd_print.cc
+        src/cmd_start.cc
+        src/echo_server.cc
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME}
@@ -33,6 +35,7 @@ target_compile_options(${CMAKE_PROJECT_NAME}
 
 target_link_libraries(${CMAKE_PROJECT_NAME}
     PRIVATE
+        bcg_grpc_proto
         fmt::fmt
         argparse::argparse
         nlohmann_json::nlohmann_json

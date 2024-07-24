@@ -1,9 +1,10 @@
 {
   "dependencies": [
-    "fmt",
     "argparse",
+    "fmt",
+    "grpc",
     "nlohmann-json",
     "protobuf",
-    "grpc"
+    "gtest"
   ]
 }
