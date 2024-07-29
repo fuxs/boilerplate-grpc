@@ -3,6 +3,8 @@
 #include <nlohmann/json.hpp>
 #include <vector>
 #include "mib/base.h"
+#include <grpcpp/grpcpp.h>
+#include <memory>
 
 namespace mib
 {
@@ -28,5 +30,19 @@ namespace mib
 
     private:
         std::string address_;
+    };
+
+    class CmdSend : public Command
+    {
+
+    public:
+        CmdSend();
+        void update(json &args);
+        bool run(json &args);
+
+    private:
+        std::shared_ptr<grpc::Channel> channel_;
+        std::string address_;
+        std::string message_;
     };
 }

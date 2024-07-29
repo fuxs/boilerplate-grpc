@@ -26,7 +26,9 @@ int main(int argc, char *argv[])
     mib::Application app;
     mib::CmdPrint cmdPrint;
     mib::CmdStart cmdStart;
+    mib::CmdSend cmdSend;
     app.add(cmdPrint);
     app.add(cmdStart);
+    app.add(cmdSend);
     return app.run(argc, argv);
 }

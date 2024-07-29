@@ -19,7 +19,9 @@ target_sources(${CMAKE_PROJECT_NAME}
         src/application.cc
         src/mib/base.cc
         src/cmd_print.cc
+        src/cmd_send.cc
         src/cmd_start.cc
+        src/echo_client.cc
         src/echo_server.cc
 )
 
