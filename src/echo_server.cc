@@ -5,7 +5,6 @@
 #include <grpcpp/grpcpp.h>
 #include <grpcpp/health_check_service_interface.h>
 
-
 using echo::Greeter;
 using echo::HelloReply;
 using echo::HelloRequest;
@@ -29,6 +28,18 @@ public:
 
     Status SayHelloStreamReply(ServerContext *context, const HelloRequest *request, ServerWriter<HelloReply> *writer) override
     {
+        auto name = request->name();
+        auto reply = HelloReply();
+        reply.set_message(fmt::format("Hello {}", name));
+        if (writer->Write(reply))
+        {
+            reply.set_message(fmt::format("Hallo {}", name));
+            if (writer->Write(reply))
+            {
+                reply.set_message(fmt::format("Olá {}", name));
+                writer->Write(reply);
+            }
+        }
         return Status::OK;
     }
 
@@ -38,12 +49,13 @@ public:
     }
 };
 
-void run_server(const std::string& address) {
+void run_server(const std::string &address)
+{
     EchoServerImpl service;
 
     grpc::EnableDefaultHealthCheckService(true);
     grpc::reflection::InitProtoReflectionServerBuilderPlugin();
-    
+
     ServerBuilder sb;
     sb.AddListeningPort(address, grpc::InsecureServerCredentials());
     sb.RegisterService(&service);

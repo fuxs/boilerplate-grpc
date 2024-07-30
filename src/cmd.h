@@ -44,5 +44,6 @@ namespace mib
         std::shared_ptr<grpc::Channel> channel_;
         std::string address_;
         std::string message_;
+        bool multi_;
     };
 }
