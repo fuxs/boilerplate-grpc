@@ -15,7 +15,7 @@ namespace mib
 
         std::string SayHello(std::string &name);
         std::vector<std::string> SayHelloStreamReply(std::string &name);
-
+        void SayHelloBidiStream();
     private:
         std::unique_ptr<Greeter::Stub> stub_;
     };

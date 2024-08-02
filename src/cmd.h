@@ -45,5 +45,6 @@ namespace mib
         std::string address_;
         std::string message_;
         bool multi_;
+        bool interact_;
     };
 }

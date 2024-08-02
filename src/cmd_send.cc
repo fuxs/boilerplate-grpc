@@ -14,16 +14,22 @@ mib::CmdSend::CmdSend() : Command("send")
         .help("Get multiple answers")
         .default_value(false)
         .implicit_value(true);
+    p.add_argument("-i", "--interact")
+        .help("Interactive mode")
+        .default_value(false)
+        .implicit_value(true);
     p.add_argument("message")
         .help("The message to be sent.");
 }
 
 void mib::CmdSend::update(json &args)
 {
+    auto &p = parser();
     address_ = parser().get<std::string>("--address");
     message_ = parser().get<std::string>("message");
     channel_ = grpc::CreateChannel(address_, grpc::InsecureChannelCredentials());
     multi_ = parser().get<bool>("--multi");
+    interact_ = p.get<bool>("--interact");
 }
 
 bool mib::CmdSend::run(json &args)
@@ -33,18 +39,25 @@ bool mib::CmdSend::run(json &args)
     {
         fmt::println("Sending message {} to server at {} ", message_, address_);
     }
-    if (multi_)
+    if (interact_)
     {
-        auto response = client.SayHelloStreamReply(message_);
-        for (auto msg : response)
-        {
-            fmt::println(msg);
-        }
+        client.SayHelloBidiStream();
     }
     else
     {
-        auto response = client.SayHello(message_);
-        fmt::println(response);
+        if (multi_)
+        {
+            auto response = client.SayHelloStreamReply(message_);
+            for (auto msg : response)
+            {
+                fmt::println(msg);
+            }
+        }
+        else
+        {
+            auto response = client.SayHello(message_);
+            fmt::println(response);
+        }
     }
     return true;
 }

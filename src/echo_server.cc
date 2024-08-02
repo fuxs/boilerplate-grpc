@@ -45,6 +45,22 @@ public:
 
     Status SayHelloBidiStream(ServerContext *context, ServerReaderWriter<HelloReply, HelloRequest> *stream) override
     {
+        HelloRequest request;
+        HelloReply reply;
+        while (stream->Read(&request))
+        {
+            auto name = request.name();
+            reply.set_message(fmt::format("Hello {}", name));
+            if (stream->Write(reply))
+            {
+                reply.set_message(fmt::format("Hallo {}", name));
+                if (stream->Write(reply))
+                {
+                    reply.set_message(fmt::format("Olá {}", name));
+                    stream->Write(reply);                    
+                }
+            }
+        }
         return Status::OK;
     }
 };
